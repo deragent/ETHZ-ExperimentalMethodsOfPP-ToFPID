@@ -1,0 +1,18 @@
+# Set the verbosity of the messages to stdout
+/control/verbose 1
+/tracking/verbose 0
+/run/verbose 1
+/control/cout/ignoreThreadsExcept 0
+
+# Initialize the simulation
+/run/initialize
+
+# Define the primary particle
+/gun/particle e-
+/gun/energy 1 GeV
+
+# Set the output file
+/analysis/setFileName TestOutput.root
+
+# Simulated N amount of events
+/run/beamOn 1000

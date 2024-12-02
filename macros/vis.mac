@@ -1,0 +1,28 @@
+# Set the verbosity of stdout messages
+/control/verbose 0
+/run/verbose 1
+
+# Initialize the simulation
+/run/initialize
+
+# Open a viewer
+/vis/open
+
+# Disable auto refresh and quieten vis messages whilst scene and
+# trajectories are established:
+/vis/viewer/set/autoRefresh false
+/vis/verbose errors
+
+# Draw geometry:
+/vis/drawVolume
+
+# Draw smooth trajectories at end of event
+/vis/scene/add/trajectories smooth
+
+
+# To superimpose all of the events from a given run:
+/vis/scene/endOfEventAction accumulate
+
+# Re-establish auto refreshing and verbosity:
+/vis/viewer/set/autoRefresh true
+/vis/verbose warnings
