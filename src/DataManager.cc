@@ -6,12 +6,6 @@
 #include "G4AnalysisManager.hh"
 
 
-// DataManager::MasterRunAction::MasterRunAction()
-// {
-//   auto analysisManager = G4AnalysisManager::Instance();
-//   analysisManager->SetNtupleMerging(true);
-// }
-
 DataManager::RunAction::RunAction()
 {
   // Default configuration of the data saving
@@ -26,6 +20,9 @@ DataManager::RunAction::RunAction()
 
   analysisManager->CreateNtupleIColumn("TruePID");
   analysisManager->CreateNtupleDColumn("TrueMomentum");
+
+  analysisManager->CreateNtupleDColumn("TrueTime0");
+  analysisManager->CreateNtupleDColumn("TrueTime1");
 
   analysisManager->FinishNtuple();
 }
@@ -60,6 +57,9 @@ void DataManager::EventAction::BeginOfEventAction(const G4Event* event)
   time0 = -1.;
   time1 = -1;
 
+  trueTime0 = -1;
+  trueTime1 = -1;
+
   // Do not reset truePID and trueMomentum here!
   // SetPrimaryParticle (by the gun) is called before BeginOfEventAction is called!
 }
@@ -73,19 +73,23 @@ void DataManager::EventAction::EndOfEventAction(const G4Event* event)
   analysisManager->FillNtupleDColumn(1, time1);
   analysisManager->FillNtupleIColumn(2, truePID);
   analysisManager->FillNtupleDColumn(3, trueMomentum);
+  analysisManager->FillNtupleDColumn(4, trueTime0);
+  analysisManager->FillNtupleDColumn(5, trueTime1);
 
   analysisManager->AddNtupleRow();
 }
 
-void DataManager::EventAction::SetTime(G4int idx, G4double time)
+void DataManager::EventAction::SetTime(G4int idx, G4double time, G4double trueTime)
 {
   // Only record the first time for each detector
   if(idx == 0 && time0 == -1.)
   {
     time0 = time;
+    trueTime0 = trueTime;
   } else if(idx == 1 && time1 == -1.)
   {
     time1 = time;
+    trueTime1 = trueTime;
   }
 }
 

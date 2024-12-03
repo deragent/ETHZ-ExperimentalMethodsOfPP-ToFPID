@@ -31,6 +31,7 @@ public:
   void BuildForMaster() const override
   {
     // Handles runs
+    // Needed here for the Analysis Manager to work properly
     SetUserAction(new DataManager::RunAction());
   }
 
@@ -40,7 +41,6 @@ public:
     SetUserAction(new FakeBeam());
 
     // Handles Runs
-    // Needed here for the Analysis Manager to work properly
     SetUserAction(new DataManager::RunAction());
 
     // Handles events
