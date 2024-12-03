@@ -26,16 +26,24 @@ void FakeBeam::GeneratePrimaries(G4Event* event)
 {
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
 
-  // TODO Randomize particle and Energy / Momentum
+  // Randomize particle type
   G4ParticleDefinition* particle = nullptr;
   G4double pProb = G4RandFlat::shoot(0., 1.);
-  if(pProb < 0.33)
+  if(pProb < 0.2)
   {
     particle = particleTable->FindParticle("e-");
-  } else if(pProb >= 0.33 && pProb < 0.66)
+  } else if(pProb >= 0.2 && pProb < 0.4)
   {
     particle = particleTable->FindParticle("mu-");
-  } else
+  } else if(pProb >= 0.4 && pProb < 0.6)
+  {
+    // pi+
+    particle = particleTable->FindParticle("pi+");
+  } else if(pProb >= 0.6 && pProb < 0.8)
+  {
+    // K+
+    particle = particleTable->FindParticle(321);
+  }  else
   {
     // Proton
     particle = particleTable->FindParticle(2212);
