@@ -53,14 +53,14 @@ foreach(_script ${MAC_SCRIPTS})
     )
 endforeach()
 
-# set(ANALYSIS_SCRIPTS
-#     ShowImages.ipynb
-#    )
-#
-# foreach(_script ${ANALYSIS_SCRIPTS})
-#   configure_file(
-#     ${PROJECT_SOURCE_DIR}/python/${_script}
-#     ${PROJECT_BINARY_DIR}/${_script}
-#     COPYONLY
-#     )
-# endforeach()
+set(ANALYSIS_SCRIPTS
+   ToFPID.ipynb
+  )
+
+foreach(_script ${ANALYSIS_SCRIPTS})
+ configure_file(
+   ${PROJECT_SOURCE_DIR}/python/${_script}
+   ${PROJECT_BINARY_DIR}/${_script}
+   COPYONLY
+   )
+endforeach()
