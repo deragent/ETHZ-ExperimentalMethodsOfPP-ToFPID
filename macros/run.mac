@@ -8,7 +8,7 @@
 /run/initialize
 
 # Set the output file
-/analysis/setFileName TestOutput.root
+/analysis/setFileName MixedParticles_N100000.root
 
 # Simulated N amount of events
 /run/beamOn 100000
